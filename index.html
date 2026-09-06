@@ -3,108 +3,410 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SUJITHKUMAR S | Full Stack Developer & Cyber Security Student</title>
-  <meta name="description" content="Personal Portfolio of SUJITHKUMAR S - Full Stack Developer & B.E. CSE (Cyber Security) Student.">
+  <title>SUJITHKUMAR S | Cybersecurity & Full Stack Developer</title>
+  <meta name="description" content="Portfolio of SUJITHKUMAR S — B.E. CSE (Cyber Security) student and aspiring cybersecurity & full stack developer. Explore projects, skills, and certifications.">
   <meta name="theme-color" content="#030712">
-  
+  <meta name="author" content="SUJITHKUMAR S">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="SUJITHKUMAR S | Cybersecurity & Full Stack Developer">
+  <meta property="og:description" content="B.E. CSE (Cyber Security) student building modern web experiences and exploring secure digital solutions.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="sujith.jpg">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Main CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ANIMATED BACKGROUND ELEMENTS -->
-  <canvas id="bg-canvas"></canvas>
-  <div class="bg-orb bg-orb-1"></div>
-  <div class="bg-orb bg-orb-2"></div>
+  <!-- ANIMATED BACKGROUND -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="nav-brand">
-        <span class="nav-brand-dot"></span>
+      <a href="#home" class="nav-brand" aria-label="Home">
+        <span class="nav-brand-dot" aria-hidden="true"></span>
         SUJITHKUMAR S
       </a>
 
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="nav-link active">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="experience.html" class="nav-link">Experience</a></li>
-        <li><a href="skills.html" class="nav-link">Skills</a></li>
-        <li><a href="projects.html" class="nav-link">Projects</a></li>
-        <li><a href="certifications.html" class="nav-link">Certifications</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#certifications" class="nav-link" data-section="certifications">Certifications</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
       </ul>
 
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars"></i>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="section hero-section">
-    <div class="container">
-      <h1 class="hero-title">SUJITHKUMAR S</h1>
-      <h2 class="hero-subtitle">Full Stack Developer | Cyber Security Student</h2>
-      <p class="hero-desc">
-        Building modern web experiences and exploring secure digital solutions.
-      </p>
+  <main>
 
-      <div class="hero-actions">
-        <a href="projects.html" class="btn btn-primary">
-          <i class="fa-solid fa-code"></i> View Projects
-        </a>
-        <a href="contact.html" class="btn btn-outline">
-          <i class="fa-solid fa-envelope"></i> Contact Me
-        </a>
+    <!-- HERO -->
+    <section class="section hero" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-status reveal">
+              <span class="pulse" aria-hidden="true"></span>
+              Open to internships & collaborations
+            </span>
+            <h1 class="hero-title reveal">
+              Hi, I&apos;m <span class="grad">SUJITHKUMAR&nbsp;S</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+              BE CSE (Cyber Security) Student | Aspiring Cybersecurity &amp; Full Stack Developer
+            </p>
+            <p class="hero-desc reveal">
+              I build modern, responsive web experiences and explore secure digital
+              solutions — combining full-stack development with a strong interest in
+              cybersecurity fundamentals.
+            </p>
+
+            <div class="hero-actions reveal">
+              <a href="#projects" class="btn btn-primary">
+                <i class="fa-solid fa-code" aria-hidden="true"></i> View Projects
+              </a>
+              <a href="https://github.com/Sujithkumar15" target="_blank" rel="noopener" class="btn btn-outline">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub Profile
+              </a>
+              <a href="#contact" class="btn btn-outline">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact Me
+              </a>
+            </div>
+
+            <div class="hero-socials reveal">
+              <a href="https://github.com/Sujithkumar15" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+              </a>
+              <a href="mailto:sujithkumar.cyb25@kitech.edu.in" aria-label="Email">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal">
+            <div class="avatar-wrap">
+              <div class="avatar-ring">
+                <img src="sujith.jpg" alt="Portrait of SUJITHKUMAR S">
+              </div>
+              <div class="float-badge b1">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Cyber Security
+              </div>
+              <div class="float-badge b2">
+                <i class="fa-solid fa-code" aria-hidden="true"></i> Full Stack
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- HIGHLIGHT OVERVIEW CARDS -->
-  <section class="section" style="padding-top: 0;">
-    <div class="container">
-      <div class="projects-grid">
-        <div class="card">
-          <div class="section-tag">[ CURRENT ROLE ]</div>
-          <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;">Kibozera AI & Automation</h3>
-          <p style="color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 10px;" class="font-mono">Full Stack Developer</p>
-          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;">
-            Contributing to web applications, frontend and backend development, and AI-powered automation solutions.
-          </p>
-          <a href="experience.html" class="btn btn-outline btn-sm">Read More <i class="fa-solid fa-arrow-right"></i></a>
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">[ Profile ]</span>
+          <h2 class="section-title">About Me</h2>
         </div>
 
-        <div class="card">
-          <div class="section-tag">[ EDUCATION ]</div>
-          <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;">B.E. CSE – Cyber Security</h3>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 10px;" class="font-mono">Kangeyam Institute of Technology</p>
-          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;">
-            Focusing on computer science fundamentals, full-stack software development, and network security concepts.
-          </p>
-          <a href="about.html" class="btn btn-outline btn-sm">About Me <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>
+              I&apos;m a <strong>B.E. CSE (Cyber Security)</strong> student passionate about
+              <strong>full-stack development</strong> and <strong>cybersecurity</strong>. I enjoy
+              turning ideas into clean, responsive web applications while learning how to build and
+              secure digital systems.
+            </p>
+            <p>
+              My focus areas span frontend and backend development, computer science fundamentals,
+              and network security concepts. I&apos;m always exploring new tools and practical ways
+              to build reliable, secure software.
+            </p>
+          </div>
+
+          <div class="card reveal">
+            <div class="info-list">
+              <div class="info-item">
+                <span class="ic" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
+                <div>
+                  <h4>Education</h4>
+                  <p>B.E. CSE – Cyber Security, Kangeyam Institute of Technology</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="ic" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+                <div>
+                  <h4>Focus</h4>
+                  <p>Full Stack Development &amp; Cybersecurity Fundamentals</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="ic" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+                <div>
+                  <h4>Current Role</h4>
+                  <p>Full Stack Developer at Kibozera AI &amp; Automation</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="section-tag">[ CREDENTIALS ]</div>
-          <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;">Cisco & Simplilearn</h3>
-          <p style="color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 10px;" class="font-mono">Cyber Security Certifications</p>
-          <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 16px;">
-            Completed Introduction to Cybersecurity (Cisco) & Introduction to Cyber Crime (Simplilearn SkillUp).
-          </p>
-          <a href="certifications.html" class="btn btn-outline btn-sm">View Certifications <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="timeline">
+          <div class="card timeline-item reveal">
+            <div class="tl-kind">Education</div>
+            <h3 class="tl-role">B.E. CSE – Cyber Security</h3>
+            <p class="tl-org font-mono">Kangeyam Institute of Technology</p>
+            <ul class="tl-list">
+              <li>Computer science fundamentals and full-stack software development.</li>
+              <li>Network security concepts and cybersecurity fundamentals.</li>
+            </ul>
+          </div>
+
+          <div class="card timeline-item reveal">
+            <div class="tl-kind">Experience</div>
+            <h3 class="tl-role">Full Stack Developer</h3>
+            <p class="tl-org font-mono">Kibozera AI &amp; Automation</p>
+            <ul class="tl-list">
+              <li>Developing and maintaining modern web applications.</li>
+              <li>Working across frontend and backend to deliver responsive UIs and APIs.</li>
+              <li>Integrating AI-powered automation into digital workflows.</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">[ Technical Proficiency ]</span>
+          <h2 class="section-title">Skills &amp; Technologies</h2>
+          <p class="section-lead">A snapshot of the languages, frameworks and tools I work with.</p>
+        </div>
+
+        <div class="skills-cats">
+          <div class="card reveal">
+            <div class="skill-cat-head">
+              <span class="ic" aria-hidden="true"><i class="fa-solid fa-terminal"></i></span>
+              <h3>Programming</h3>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fa-solid fa-c" aria-hidden="true"></i> C</span>
+              <span class="skill-chip"><i class="fa-brands fa-python" aria-hidden="true"></i> Python</span>
+              <span class="skill-chip"><i class="fa-brands fa-java" aria-hidden="true"></i> Java</span>
+              <span class="skill-chip"><i class="fa-brands fa-js" aria-hidden="true"></i> JavaScript</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="skill-cat-head">
+              <span class="ic" aria-hidden="true"><i class="fa-solid fa-window-maximize"></i></span>
+              <h3>Web Development</h3>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fa-brands fa-html5" aria-hidden="true"></i> HTML</span>
+              <span class="skill-chip"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i> CSS</span>
+              <span class="skill-chip"><i class="fa-brands fa-js" aria-hidden="true"></i> JavaScript</span>
+              <span class="skill-chip"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
+              <span class="skill-chip"><i class="fa-solid fa-n" aria-hidden="true"></i> Next.js</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="skill-cat-head">
+              <span class="ic" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+              <h3>Cybersecurity</h3>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fa-solid fa-lock" aria-hidden="true"></i> Cybersecurity Fundamentals</span>
+              <span class="skill-chip"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> Networking Basics</span>
+              <span class="skill-chip"><i class="fa-solid fa-bug" aria-hidden="true"></i> Cyber Attack Concepts</span>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="skill-cat-head">
+              <span class="ic" aria-hidden="true"><i class="fa-solid fa-toolbox"></i></span>
+              <h3>Tools</h3>
+            </div>
+            <div class="skill-chips">
+              <span class="skill-chip"><i class="fa-brands fa-git-alt" aria-hidden="true"></i> Git</span>
+              <span class="skill-chip"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</span>
+              <span class="skill-chip"><i class="fa-solid fa-code" aria-hidden="true"></i> VS Code</span>
+              <span class="skill-chip"><i class="fa-solid fa-fire" aria-hidden="true"></i> Firebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">[ Featured Works ]</span>
+          <h2 class="section-title">Projects</h2>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card project-card reveal">
+            <div class="project-top">
+              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-window-restore"></i></span>
+            </div>
+            <h3 class="project-title">SWAN Web Application</h3>
+            <p class="project-desc">
+              Interactive web application built for clean user workflows and responsive frontend design.
+            </p>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Sujithkumar15" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-top">
+              <span class="project-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+            </div>
+            <h3 class="project-title">Secure Full-Stack Portal</h3>
+            <p class="project-desc">
+              Web application incorporating user authentication, backend integrations and security controls.
+            </p>
+            <div class="project-tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Cyber Security</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/Sujithkumar15" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" id="certifications">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">[ Credentials ]</span>
+          <h2 class="section-title">Certifications</h2>
+        </div>
+
+        <div class="cert-grid">
+          <div class="card cert-card reveal">
+            <div class="cert-icon" aria-hidden="true">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="cert-details">
+              <h4>Introduction to Cybersecurity</h4>
+              <p class="font-mono">Cisco Networking Academy</p>
+              <span class="cert-badge">
+                <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Completed
+              </span>
+            </div>
+          </div>
+
+          <div class="card cert-card reveal">
+            <div class="cert-icon" aria-hidden="true">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div class="cert-details">
+              <h4>Introduction to Cyber Crime</h4>
+              <p class="font-mono">Simplilearn SkillUp</p>
+              <span class="cert-badge">
+                <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Completed
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">[ Get In Touch ]</span>
+          <h2 class="section-title">Contact</h2>
+          <p class="section-lead">Have an opportunity or just want to say hello? Reach out through any channel below.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card reveal">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Connect Directly</h3>
+            <div class="contact-links">
+              <a href="mailto:sujithkumar.cyb25@kitech.edu.in" class="contact-item font-mono">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                sujithkumar.cyb25@kitech.edu.in
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-item font-mono">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                LinkedIn Profile
+              </a>
+              <a href="https://github.com/Sujithkumar15" target="_blank" rel="noopener" class="contact-item font-mono">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+                github.com/Sujithkumar15
+              </a>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Send a Message</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 8px 0 20px;" class="font-mono">
+              Submitting opens your email client to send directly to sujithkumar.cyb25@kitech.edu.in.
+            </p>
+
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" class="input-field" placeholder="Your Name" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" class="input-field" placeholder="name@domain.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="contact-msg">Message</label>
+                <textarea id="contact-msg" name="message" class="input-field" rows="4" placeholder="Your message here..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 6px;">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -113,7 +415,7 @@
     </div>
   </footer>
 
-  <div id="toast-container" class="toast-container"></div>
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
 </html>

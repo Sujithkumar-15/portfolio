@@ -1,147 +1,163 @@
 /* ==========================================================================
-   SUJITHKUMAR S - PORTFOLIO INTERACTION ENGINE & PARTICLE CANVAS
+   SUJITHKUMAR S — PORTFOLIO INTERACTION ENGINE
+   Single-page: particle canvas, sticky nav, scroll spy, reveal, contact form
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   initParticleCanvas();
+  initNavbarScroll();
   initMobileNav();
-  initActiveNavLink();
+  initScrollSpy();
+  initScrollReveal();
+  initProjectSpotlight();
   initContactForm();
-  initScrollAnimations();
 });
 
-/* 1. INTERACTIVE CONSTELLATION NETWORK PARTICLE CANVAS BACKGROUND */
+/* 1. CONSTELLATION PARTICLE BACKGROUND */
 function initParticleCanvas() {
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
 
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
   const ctx = canvas.getContext('2d');
-  let width, height;
-  let particles = [];
+  let width, height, particles = [];
 
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
-
   window.addEventListener('resize', resize);
   resize();
 
-  // Particle Density based on screen size
-  const particleCount = Math.min(Math.floor(window.innerWidth / 20), 55);
-
-  for (let i = 0; i < particleCount; i++) {
+  const count = Math.min(Math.floor(window.innerWidth / 22), 50);
+  for (let i = 0; i < count; i++) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      radius: Math.random() * 1.8 + 1
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      radius: Math.random() * 1.6 + 1
     });
   }
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-
-    // Render & Move Particles
     for (let i = 0; i < particles.length; i++) {
-      let p = particles[i];
+      const p = particles[i];
       p.x += p.vx;
       p.y += p.vy;
-
       if (p.x < 0 || p.x > width) p.vx *= -1;
       if (p.y < 0 || p.y > height) p.vy *= -1;
 
-      // Draw particle dot
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(6, 182, 212, 0.6)';
+      ctx.fillStyle = 'rgba(34, 211, 238, 0.55)';
       ctx.fill();
 
-      // Connect nearby particles with subtle network lines
       for (let j = i + 1; j < particles.length; j++) {
-        let p2 = particles[j];
-        let dx = p.x - p2.x;
-        let dy = p.y - p2.y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 130) {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(6, 182, 212, ${0.25 * (1 - dist / 130)})`;
-          ctx.lineWidth = 0.75;
+          ctx.strokeStyle = `rgba(34, 211, 238, ${0.22 * (1 - dist / 130)})`;
+          ctx.lineWidth = 0.7;
           ctx.stroke();
         }
       }
     }
-
     requestAnimationFrame(animate);
   }
-
   animate();
 }
 
-/* 2. MOBILE NAVIGATION TOGGLE */
+/* 2. STICKY NAVBAR BACKGROUND ON SCROLL */
+function initNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+  const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+/* 3. MOBILE NAVIGATION TOGGLE */
 function initMobileNav() {
   const toggleBtn = document.getElementById('mobile-toggle');
   const navLinks = document.getElementById('nav-links');
-
   if (!toggleBtn || !navLinks) return;
 
+  const setOpen = (open) => {
+    navLinks.classList.toggle('active', open);
+    toggleBtn.setAttribute('aria-expanded', String(open));
+    toggleBtn.innerHTML = open
+      ? '<i class="fa-solid fa-xmark" aria-hidden="true"></i>'
+      : '<i class="fa-solid fa-bars" aria-hidden="true"></i>';
+  };
+
   toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+    setOpen(!navLinks.classList.contains('active'));
   });
 
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-    });
+    link.addEventListener('click', () => setOpen(false));
   });
 }
 
-/* 3. MULTI-PAGE ACTIVE NAVIGATION TRACKER */
-function initActiveNavLink() {
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+/* 4. SCROLL SPY — ACTIVE SECTION HIGHLIGHTING */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('main section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
+  if (!sections.length || !navLinks.length) return;
 
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (!href) return;
-    const linkPage = href.split('/').pop().split('#')[0];
-
-    if (linkPage === currentPath || (currentPath === '' && linkPage === 'index.html')) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-}
-
-/* 4. DYNAMIC SCROLL ANIMATIONS */
-function initScrollAnimations() {
-  const animatedElements = document.querySelectorAll('.card, .skill-card, .section-header');
+  const setActive = (id) => {
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.section === id);
+    });
+  };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(section => observer.observe(section));
+}
+
+/* 5. SCROLL REVEAL ANIMATIONS */
+function initScrollReveal() {
+  const elements = document.querySelectorAll('.reveal');
+  if (!elements.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, index * 80);
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.12 });
 
-  animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-    observer.observe(el);
+  elements.forEach(el => observer.observe(el));
+}
+
+/* 6. PROJECT CARD CURSOR SPOTLIGHT */
+function initProjectSpotlight() {
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
   });
 }
 
-/* 5. FUNCTIONAL & RESPONSIVE CONTACT FORM HANDLER */
+/* 7. CONTACT FORM HANDLER (mailto) */
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -149,64 +165,59 @@ function initContactForm() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const nameInput = document.getElementById('contact-name');
-    const emailInput = document.getElementById('contact-email');
-    const msgInput = document.getElementById('contact-msg');
-
-    const name = nameInput ? nameInput.value.trim() : '';
-    const email = emailInput ? emailInput.value.trim() : '';
-    const msg = msgInput ? msgInput.value.trim() : '';
+    const name = (document.getElementById('contact-name')?.value || '').trim();
+    const email = (document.getElementById('contact-email')?.value || '').trim();
+    const msg = (document.getElementById('contact-msg')?.value || '').trim();
 
     if (!name || !email || !msg) {
       showToast('Please complete all required fields.', 'error');
       return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showToast('Please enter a valid email address.', 'error');
+      return;
+    }
 
     const submitBtn = form.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
-
+    const originalHTML = submitBtn ? submitBtn.innerHTML : '';
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Opening Email App...';
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Opening Email App...';
     }
 
     const recipient = 'sujithkumar.cyb25@kitech.edu.in';
     const subject = encodeURIComponent(`Portfolio Message from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
 
-    const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
-
-    showToast(`Launching email client to send message to ${recipient}...`);
+    showToast(`Launching your email client to reach ${recipient}...`);
 
     setTimeout(() => {
-      window.location.href = mailtoUrl;
-
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
+        submitBtn.innerHTML = originalHTML;
       }
       form.reset();
     }, 800);
   });
 }
 
-/* 6. TOAST NOTIFICATION HANDLER */
+/* 8. TOAST NOTIFICATIONS */
 function showToast(message, type = 'success') {
   const container = document.getElementById('toast-container');
   if (!container) return;
 
   const toast = document.createElement('div');
   toast.className = 'toast';
+  toast.setAttribute('role', 'status');
 
   const iconClass = type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-check';
   const iconColor = type === 'error' ? '#ef4444' : 'var(--accent-cyan)';
 
-  toast.innerHTML = `<i class="fa-solid ${iconClass}" style="color:${iconColor}; margin-right:8px;"></i> ${escapeHTML(message)}`;
+  toast.innerHTML = `<i class="fa-solid ${iconClass}" style="color:${iconColor}; margin-right:8px;" aria-hidden="true"></i> ${escapeHTML(message)}`;
   container.appendChild(toast);
 
-  setTimeout(() => {
-    toast.remove();
-  }, 4000);
+  setTimeout(() => toast.remove(), 4000);
 }
 
 function escapeHTML(str) {
