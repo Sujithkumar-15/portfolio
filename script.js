@@ -189,7 +189,7 @@ function initContactForm() {
     const subject = encodeURIComponent(`Portfolio Message from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
 
-    showToast(`Launching your email client to reach ${recipient}...`);
+    showToast('Opening your email client with your message...');
 
     setTimeout(() => {
       window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
