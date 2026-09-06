@@ -434,7 +434,9 @@ body::before {
   gap: 12px;
 }
 
-.hero-socials a {
+/* ---------- Icon-only social buttons + tooltips ---------- */
+.social-icon {
+  position: relative;
   width: 44px;
   height: 44px;
   display: flex;
@@ -444,13 +446,74 @@ body::before {
   border-radius: 12px;
   color: var(--text-secondary);
   font-size: 1.15rem;
-  transition: all 0.2s ease;
+  background: rgba(148, 163, 184, 0.04);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease,
+    background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.hero-socials a:hover {
+.social-icon:hover {
   color: var(--accent-cyan);
   border-color: var(--accent-cyan);
   transform: translateY(-3px);
+  background: rgba(34, 211, 238, 0.08);
+  box-shadow: 0 8px 22px -10px var(--accent-glow);
+}
+
+.social-icon-lg {
+  width: 52px;
+  height: 52px;
+  font-size: 1.3rem;
+  border-radius: 14px;
+}
+
+/* Tooltip shown on hover/focus of any element with data-tooltip */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 6px 11px;
+  background: rgba(10, 17, 32, 0.98);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(10, 17, 32, 0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::before {
+  opacity: 1;
 }
 
 /* Hero visual */
@@ -833,39 +896,15 @@ body::before {
   align-items: start;
 }
 
-.contact-links {
+.contact-connect {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 20px;
 }
 
-.contact-item {
+.social-row {
   display: flex;
-  align-items: center;
   gap: 14px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(148, 163, 184, 0.04);
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-  word-break: break-all;
-}
-
-.contact-item i {
-  color: var(--accent-cyan);
-  font-size: 1.15rem;
-  width: 22px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.contact-item:hover {
-  border-color: var(--accent-cyan);
-  color: var(--text-primary);
-  transform: translateX(4px);
+  margin-top: 24px;
 }
 
 .form-group {
